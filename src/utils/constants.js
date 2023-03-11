@@ -1,1 +1,1 @@
-export const api_url = "https://test-chemicals-backend-production.up.railway.app";
+export const api_url = "https://chemicals-backend.onrender.com/";
