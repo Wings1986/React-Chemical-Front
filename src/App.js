@@ -9,6 +9,7 @@ import Register from "./screens/Register";
 import Dashboard from "./screens/Dashboard";
 import AddChemical from "./screens/AddChemical";
 import { useEffect, useState } from "react";
+import {api_url} from './utils/constants'
 
 function App() {
   const { token} = JSON.parse(localStorage.getItem("user_info")) || "";
@@ -17,7 +18,7 @@ function App() {
   const [chemicals, setChemicals] = useState([]);
 
   const fetchChemicals = (token) => {
-    fetch("/chemicals", {
+    fetch(api_url + "/chemicals", {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -44,7 +45,7 @@ function App() {
     setChemicals((oldArr) => [...oldArr, chemical]);
   };
   const handleChemicalDelete = (id) => {
-    fetch(`/chemicals/${id}`, {
+    fetch(api_url + `/chemicals/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `Bearer ${token}`,

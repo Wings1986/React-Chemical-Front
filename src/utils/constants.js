@@ -1,0 +1,1 @@
+export const api_url = "https://test-chemicals-backend-production.up.railway.app";

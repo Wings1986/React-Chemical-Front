@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "../styles/AddChemical.scss";
+import {api_url} from '../utils/constants'
 
 const AddChemical = ({history, addChemical}) => {
 
@@ -22,7 +23,7 @@ const {chemicalName, chemicalQuantity} = chemicalData;
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch("/chemicals", {
+        fetch(api_url + "/chemicals", {
             method: "POST",
             headers: {
               "Content-type": "Application/json",

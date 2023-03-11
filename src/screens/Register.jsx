@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "../styles/Register.scss";
+import {api_url} from '../utils/constants';
 
 const Register = ({handleLogin, history, fetchChemicals}) => {
 
@@ -20,7 +21,7 @@ const Register = ({handleLogin, history, fetchChemicals}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch("/register", {
+        fetch(api_url + "/register", {
             method: "POST",
             headers: {
               "Content-type": "Application/json"
