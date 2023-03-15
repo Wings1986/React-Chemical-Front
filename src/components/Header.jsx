@@ -17,7 +17,7 @@ const Header = ({ handleLogout, isLoggedIn }) => {
           {isLoggedIn === "true" || token ? (
               <>
                 <li>
-                  <Link to="/dashboard">
+                  <Link to="/welcome">
                     Welcome <span className={`text-lime-400`}>{first_name.toUpperCase()}!</span>
                   </Link>
                 </li>

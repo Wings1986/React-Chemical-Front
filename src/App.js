@@ -10,6 +10,7 @@ import Dashboard from "./screens/Dashboard";
 import AddChemical from "./screens/AddChemical";
 import { useEffect, useState } from "react";
 import {api_url} from './utils/constants'
+import Welcome from "./screens/Welcome";
 
 function App() {
   const { token} = JSON.parse(localStorage.getItem("user_info")) || "";
@@ -125,16 +126,26 @@ function App() {
           return <Redirect to="/login" />;
         }}
       />
-      <Route
-        exact
-        path="/add-chemical"
-        render={(props) => {
-          if (isLoggedIn === "true" || token) {
-            return <AddChemical fetchChemicals={() => fetchChemicals(token)} addChemical={addChemical} {...props} />;
-          }
-          return <Redirect to="/login" />;
-        }}
-      />
+        <Route
+            exact
+            path="/add-chemical"
+            render={(props) => {
+                if (isLoggedIn === "true" || token) {
+                    return <AddChemical fetchChemicals={() => fetchChemicals(token)} addChemical={addChemical} {...props} />;
+                }
+                return <Redirect to="/login" />;
+            }}
+        />
+        <Route
+            exact
+            path="/welcome"
+            render={(props) => {
+                if (isLoggedIn === "true" || token) {
+                    return <Welcome token={token} />;
+                }
+                return <Redirect to="/login" />;
+            }}
+        />
       <Footer />
     </div>
   );
