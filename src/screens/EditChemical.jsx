@@ -34,7 +34,7 @@ const EditChemical = ({setShowEditModal, chemicalData, setChemicalData, fetchChe
             })
             .catch(err => {
                 setIsLoading(false);
-                alert('Failed to Updated!');
+                alert('Failed to Update!');
                 console.log(err)
             })
     }
