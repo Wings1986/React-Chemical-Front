@@ -114,8 +114,11 @@ function App() {
             return (
               <Dashboard
                 {...props}
+                  chemicals={chemicals}
+                fetchChemicals={() => fetchChemicals(token)}
+                addChemical={addChemical}
                 handleChemicalDelete={handleChemicalDelete}
-                chemicals={chemicals}
+                initialChemicals={chemicals}
               />
             );
           }
@@ -127,7 +130,7 @@ function App() {
         path="/add-chemical"
         render={(props) => {
           if (isLoggedIn === "true" || token) {
-            return <AddChemical addChemical={addChemical} {...props} />;
+            return <AddChemical fetchChemicals={() => fetchChemicals(token)} addChemical={addChemical} {...props} />;
           }
           return <Redirect to="/login" />;
         }}

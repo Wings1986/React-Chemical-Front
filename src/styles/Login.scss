@@ -1,24 +1,24 @@
 
 .login-container{
     padding: 10px;
-    height: 85vh;
+    height: fit-content;
+    text-align: left;
 }
 
 .login-container h2{
-    text-align: center;
+    text-align: left;
     font-weight: bolder;
-    margin-top: 12vh;
 }
 
 .login-form{
   font-size: 1rem;
   padding: 30px;
-  width: 60%;
-  margin: 5vh auto;
-  background: #dee2e61f;
+  margin: 0 auto;
+  max-width: 400px;
+  box-shadow: 0 10px 40px rgba(0, 119, 255, 0.1);
 }
 
 .login-button{
    margin: 20px auto;
-   
+   width: 100%;
 }

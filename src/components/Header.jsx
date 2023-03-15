@@ -6,52 +6,48 @@ const Header = ({ handleLogout, isLoggedIn }) => {
   const { token, first_name } = JSON.parse(localStorage.getItem("user_info")) || "";
 
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link className="nav-link logo" to="/">
+    <nav className={`shadow-md bg-primary text-white`}>
+      <div className={`container`}>
+        <h4 className={`m-0 text-lg`}>
+          <Link className="e" to="/">
             Chemical App
           </Link>
-        </li>
-
-        {isLoggedIn === "true" || token ? (
-          <>
-            <li>
-              <Link className="nav-link" to="/add-chemical">
-              Welcome {first_name.toUpperCase()}!
-              </Link>
-            </li>
-            <li>
-              <Link className="nav-link" to="/add-chemical">
-                Add chemical
-              </Link>
-            </li>
-            <li>
-              <Link className="nav-link" to="/dashboard">
-                Dashboard
-              </Link>
-            </li>
-            <li onClick={() => handleLogout()}>
-              <Link className="nav-link" to="/dashboard">
-                Logout
-              </Link>
-            </li>
-          </>
-        ) : (
-          <>
-            <li>
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link className="nav-link" to="/register">
-                Register
-              </Link>
-            </li>
-          </>
-        )}
-      </ul>
+        </h4>
+        <ul className={`flex gap-8 items-center`}>
+          {isLoggedIn === "true" || token ? (
+              <>
+                <li>
+                  <Link to="/dashboard">
+                    Welcome <span className={`text-lime-400`}>{first_name.toUpperCase()}!</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link className="" to="/dashboard">
+                    Dashboard
+                  </Link>
+                </li>
+                <li onClick={() => handleLogout()}>
+                  <Link className="" to="/dashboard">
+                    Logout
+                  </Link>
+                </li>
+              </>
+          ) : (
+              <div className={`flex gap-8 text-sm`}>
+                <li>
+                  <Link className="" to="/login">
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link className=" bg-secondary p-3 text-black rounded-md shadow-lg shadow-secondary" to="/register">
+                    Register
+                  </Link>
+                </li>
+              </div>
+          )}
+        </ul>
+      </div>
     </nav>
   );
 };

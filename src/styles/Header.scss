@@ -1,13 +1,14 @@
 nav {
-    background: #212121;
-    color: white;
-    padding: 20px;
-    position: fixed;
+    background: white;
+    padding: 20px 0;
+    position: relative;
     width: 100vw;
     top: 0;
-
-
-  }
+}
+nav > .container {
+  display: flex;
+  justify-content: space-between;
+}
   
   nav ul {
     list-style: none;
@@ -23,20 +24,12 @@ nav {
     margin-right: 1rem;
   }
   
-  .nav-link:hover{
-      color: black
-  }
-  
   .nav-link{
     text-decoration: none;
     font-weight: bold;
-    color: white !important;
   }
   
   nav ul .logo{
-      position: absolute;
-      left: 2%;
-      top: 10%;
       align-self: center;
       font-size: 1.8rem;
       font-weight: bolder;

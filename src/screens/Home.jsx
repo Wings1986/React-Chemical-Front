@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="home_container">
+    <div className="container min-h-[60vh]">
       <div className="texts">
         <h1>Chemistry App</h1>
         <div className="btns">
