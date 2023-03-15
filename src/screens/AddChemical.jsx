@@ -36,8 +36,6 @@ const {chemicalName, chemicalQuantity} = chemicalData;
           })
             .then(res => res.json())
             .then(async data => {
-                addChemical(data.data)
-                history.push("/dashboard")
                 await fetchChemicals();
                 setIsLoading(false);
          })

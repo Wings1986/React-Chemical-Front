@@ -19,6 +19,7 @@ function App() {
   const [chemicals, setChemicals] = useState([]);
 
   const fetchChemicals = (token) => {
+      console.log('test');
     fetch(api_url + "/chemicals", {
       headers: {
         authorization: `Bearer ${token}`,

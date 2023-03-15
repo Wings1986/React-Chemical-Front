@@ -6,9 +6,15 @@ import {CiEdit} from 'react-icons/ci';
 import DeleteButton from "../components/DeleteButton";
 import {FaWindowClose} from "react-icons/fa";
 import EditChemical from "./EditChemical";
+import {formatDate} from "../utils/functions";
+import {MdOutlineDeleteOutline} from "react-icons/md";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Dashboard = ({chemicals, fetchChemicals, handleChemicalDelete, handleChemicalEdit, addChemical }) => {
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleteId, setDeleteId] = useState('');
+    const [isDeleteLoading, setIsDeleteLoading] = useState(false);
     const [chemicalData, setChemicalData] = useState({
         _id: 0,
         chemicalName: "",
@@ -36,7 +42,7 @@ const Dashboard = ({chemicals, fetchChemicals, handleChemicalDelete, handleChemi
                   {
                       chemicals.map(({_id, chemicalName, chemicalQuantity, time }, idx) => (
                           <tr key={_id} className={`${idx % 2 && 'bg-gray-200'}`}>
-                              <td className={`p-1`}>{time}</td>
+                              <td className={`p-1`}>{formatDate(new Date(time))}</td>
                               <td className={`p-1`}>{chemicalName}</td>
                               <td className={`p-1`}>{chemicalQuantity}</td>
                               <td className={`p-1`}>
@@ -51,7 +57,12 @@ const Dashboard = ({chemicals, fetchChemicals, handleChemicalDelete, handleChemi
                                       }} className={`text-blue-900`}>
                                           <CiEdit size={20} />
                                       </Button>
-                                      <DeleteButton handleChemicalDelete={handleChemicalDelete} _id={_id} />
+                                      <Button onClick={async () => {
+                                          setDeleteId(_id);
+                                          setShowDeleteModal(true);
+                                      }} className={`text-red-600`}>
+                                              <MdOutlineDeleteOutline size={20} />
+                                      </Button>
                                   </div>
                               </td>
                           </tr>
@@ -68,10 +79,45 @@ const Dashboard = ({chemicals, fetchChemicals, handleChemicalDelete, handleChemi
                           <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                   <div className={`flex justify-end w-full cursor-pointer`} onClick={() => setShowEditModal(false)}>
-                                          <FaWindowClose />
+                                      <FaWindowClose />
                                   </div>
                                   <div>
                                       <EditChemical setShowEditModal={setShowEditModal} chemicalData={chemicalData} setChemicalData={setChemicalData} fetchChemicals={fetchChemicals} />
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          )}
+          {showDeleteModal && (
+              <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+                  <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                  <div className="fixed inset-0 z-10 overflow-y-auto">
+                      <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                          <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                  <div className={`flex justify-end w-full cursor-pointer`} onClick={() => setShowDeleteModal(false)}>
+                                      <FaWindowClose />
+                                  </div>
+                                  <div>
+                                    <h3>
+                                        Are you sure to delete this item ?
+                                    </h3>
+                                      <div className={`flex gap-5`}>
+                                          <button className="bg-red-600 shadow-lg shadow-secondary text-white px-6 py-2 my-5 rounded-lg" onClick={async () => {
+                                              await setIsDeleteLoading(true);
+                                              await handleChemicalDelete(deleteId);
+                                              await setIsDeleteLoading(false);
+                                              setShowDeleteModal(false);
+                                          }}>
+                                              {isDeleteLoading && <LoadingSpinner /> }
+                                              <span>Delete</span>
+                                          </button>
+                                          <button className="bg-primary shadow-lg shadow-secondary text-white px-6 py-2 my-5 rounded-lg" onClick={() => setShowDeleteModal(false)}>
+                                              <span>Cancel</span>
+                                          </button>
+                                      </div>
                                   </div>
                               </div>
                           </div>
